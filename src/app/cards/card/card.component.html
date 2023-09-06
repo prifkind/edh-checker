@@ -1,0 +1,12 @@
+<div class="container-md card">
+  <div class="row">
+    <span class="col-sm-4">{{ card.cardName }}</span>
+    <span class="col-sm-2">{{ card.cardCost }}</span>
+  </div>
+  <div class="row">
+    <span class="col-sm-4">{{ card.cardType }}</span>
+  </div>
+  <div class="row" (click)="buyCard($event)">
+    <span [ngClass]="cardClasses">${{ card.cardPrice }}</span>
+  </div>
+</div>
