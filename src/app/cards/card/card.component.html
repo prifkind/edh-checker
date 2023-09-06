@@ -1,12 +1,26 @@
 <div class="container-md card">
-  <div class="row">
-    <span class="col-sm-4">{{ card.cardName }}</span>
-    <span class="col-sm-2">{{ card.cardCost }}</span>
-  </div>
-  <div class="row">
-    <span class="col-sm-4">{{ card.cardType }}</span>
-  </div>
-  <div class="row" (click)="buyCard($event)">
-    <span [ngClass]="cardClasses">${{ card.cardPrice }}</span>
+  <div *ngFor="let card of cards; index as i">
+    <div class="row">
+      <span class="col-sm-4">{{ card.cardName }}</span>
+      <span class="col-sm-2">{{ card.cardCost }}</span>
+    </div>
+    <div class="row">
+      <span class="col-sm-4">{{ card.cardType }}</span>
+    </div>
+    <div class="row">
+      <span [ngClass]="['col-sm-4', getPriceClass(card.cardPrice)]"
+        >${{ card.cardPrice }}</span
+      >
+    </div>
+    <div *ngIf="!card.boughtCard">
+      <button class="btn-primary" (click)="buyCard($event, i)">
+        Mark as bought
+      </button>
+    </div>
+    <div *ngIf="card.boughtCard">
+      <button class="btn-primary" (click)="buyCard($event, i)">
+        Mark as sold
+      </button>
+    </div>
   </div>
 </div>

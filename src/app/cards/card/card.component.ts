@@ -8,20 +8,25 @@ import { Card } from '../card';
 })
 export class CardComponent {
   public card!: Card;
+  public cards: Card[] = [];
   public cardClasses = {};
 
   constructor() {}
 
   ngOnInit() {
-    this.card = new Card('Force of Will', 'Instant', 5, 40, false);
-    this.cardClasses = {
-      "col-sm-4 cheap" : this.card.cardPrice < 50 ? true : false,
-      "col-sm-4 expensive" : this.card.cardPrice >= 50 ? true : false,
-    }
+    this.cards = [
+      new Card('Force of Will', 'Instant', 5, 40, false),
+      new Card('Force of Nature', 'Creature', 8, 20, false),
+      new Card('Force of Negation', 'Instant', 3, 55, false),
+    ];
   }
 
-  buyCard(event: Event) {
-    this.card.boughtCard = !this.card.boughtCard;
-    console.log(this.card.boughtCard, event);
+  getPriceClass(price: number): string {
+    return price >= 50 ? 'expensive' : 'cheap';
+  }
+
+  buyCard(event: Event, index: number) {
+    this.cards[index].boughtCard = !this.cards[index].boughtCard;
+    console.log(this.cards[index].boughtCard, event);
   }
 }
